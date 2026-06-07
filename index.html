@@ -115,7 +115,7 @@ async function start() {
     for (let i = 0; i < list.length; i++) {
         let item = list[i];
         try {
-            let res = await fetch(item.url);
+            let res = await fetch('http://localhost:3000/fetch?url=' + encodeURIComponent(item.url));
             let text = await res.text();
             
             // 纯前端 XPath 解析
