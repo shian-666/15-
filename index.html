@@ -29,13 +29,81 @@
 // 问卷配置
 const list = [
     {
+        name: "阿根廷（AGE）",
+        url: "https://www.wjx.cn/report/364692255.aspx",
+        xpath: "//*[@id='ctl02_ContentPlaceHolder1_divStatData']/div[2]/div[2]/div/table/tbody/tr[5]/td[2]/b"
+    },
+    {
+        name: "埃及",
+        url: "https://www.wjx.cn/report/364750940.aspx",
+        xpath: "//*[@id='ctl02_ContentPlaceHolder1_divStatData']/div[2]/div[2]/div/table/tbody/tr[5]/td[2]/b"
+    },
+    {
         name: "希腊",
         url: "https://www.wjx.cn/report/364755272.aspx",
         xpath: "//*[@id='ctl02_ContentPlaceHolder1_divStatData']/div[2]/div[2]/div/table/tbody/tr[5]/td[2]/b"
-    },  
-    // 可继续添加其他问卷
+    },
+    {
+        name: "尼日利亚（NIG）",
+        url: "https://www.wjx.cn/report/364654071.aspx",
+        xpath: "//*[@id='ctl02_ContentPlaceHolder1_divStatData']/div[2]/div[2]/div/table/tbody/tr[5]/td[2]/b"
+    },
+    {
+        name: "澳大利亚（AUS）",
+        url: "https://www.wjx.cn/report/364626011.aspx",
+        xpath: "//*[@id='ctl02_ContentPlaceHolder1_divStatData']/div[2]/div[2]/div/table/tbody/tr[5]/td[2]/b"
+    },
+    {
+        name: "美国（USA）",
+        url: "https://www.wjx.cn/report/364654672.aspx",
+        xpath: "//*[@id='ctl02_ContentPlaceHolder1_divStatData']/div[2]/div[2]/div/table/tbody/tr[5]/td[2]/b"
+    },
+    {
+        name: "斯洛伐克（SLO）",
+        url: "https://www.wjx.cn/report/364733111.aspx",
+        xpath: "//*[@id='ctl02_ContentPlaceHolder1_divStatData']/div[2]/div[2]/div/table/tbody/tr[5]/td[2]/b"
+    },
+    {
+        name: "捷克（CEZ）",
+        url: "https://www.wjx.cn/report/364740071.aspx",
+        xpath: "//*[@id='ctl02_ContentPlaceHolder1_divStatData']/div[2]/div[2]/div/table/tbody/tr[5]/td[2]/b"
+    },
+    {
+        name: "俄罗斯（RUS）",
+        url: "https://www.wjx.cn/report/364708155.aspx",
+        xpath: "//*[@id='ctl02_ContentPlaceHolder1_divStatData']/div[2]/div[2]/div/table/tbody/tr[5]/td[2]/b"
+    },
+    {
+        name: "印度",
+        url: "https://www.wjx.cn/report/364708435.aspx",
+        xpath: "//*[@id='ctl02_ContentPlaceHolder1_divStatData']/div[2]/div[2]/div/table/tbody/tr[5]/td[2]/b"
+    },
+    {
+        name: "印度尼西亚",
+        url: "https://www.wjx.cn/report/364692062.aspx",
+        xpath: "//*[@id='ctl02_ContentPlaceHolder1_divStatData']/div[2]/div[2]/div/table/tbody/tr[5]/td[2]/b"
+    },
+    {
+        name: "墨西哥（MEX）",
+        url: "https://www.wjx.cn/report/364674108.aspx",
+        xpath: "//*[@id='ctl02_ContentPlaceHolder1_divStatData']/div[2]/div[2]/div/table/tbody/tr[5]/td[2]/b"
+    },
+    {
+        name: "荷兰（NET）",
+        url: "https://www.wjx.cn/report/364663724.aspx",
+        xpath: "//*[@id='ctl02_ContentPlaceHolder1_divStatData']/div[2]/div[2]/div/table/tbody/tr[5]/td[2]/b"
+    },
+    {
+        name: "德国（GER）",
+        url: "https://www.wjx.cn/report/364651683.aspx",
+        xpath: "//*[@id='ctl02_ContentPlaceHolder1_divStatData']/div[2]/div[2]/div/table/tbody/tr[5]/td[2]/b"
+    },
+    {
+        name: "韩国",
+        url: "https://www.wjx.cn/report/364621722.aspx",
+        xpath: "//*[@id='ctl02_ContentPlaceHolder1_divStatData']/div[2]/div[2]/div/table/tbody/tr[5]/td[2]/b"
+    }
 ];
-
 // 公共代理
 const proxyBase = "https://api.allorigins.win/raw?url=";
 
