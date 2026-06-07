@@ -26,133 +26,100 @@
     </div>
 
 <script>
-// 问卷配置
+const SAME_XPATH = "//*[@id='ctl02_ContentPlaceHolder1_divStatData']/div[2]/div[2]/div/table/tbody/tr[5]/td[2]/b";
+
 const list = [
-    {
-        name: "阿根廷（AGR）",
-        url: "https://www.wjx.cn/report/364692255.aspx",
-        xpath: "//*[@id='ctl02_ContentPlaceHolder1_divStatData']/div[2]/div[2]/div/table/tbody/tr[5]/td[2]/b"
-    },
-    {
-        name: "埃及",
-        url: "https://www.wjx.cn/report/364750940.aspx",
-        xpath: "//*[@id='ctl02_ContentPlaceHolder1_divStatData']/div[2]/div[2]/div/table/tbody/tr[5]/td[2]/b"
-    },   
-    {
-        name: "希腊",
-        url: "https://www.wjx.cn/report/364755272.aspx",
-        xpath: "//*[@id='ctl02_ContentPlaceHolder1_divStatData']/div[2]/div[2]/div/table/tbody/tr[5]/td[2]/b"
-    },
-    {
-        name: "尼日利亚（NIG）",
-        url: "https://www.wjx.cn/report/364654071.aspx",
-        xpath: "//*[@id='ctl02_ContentPlaceHolder1_divStatData']/div[2]/div[2]/div/table/tbody/tr[5]/td[2]/b"
-    },
-    {
-        name: "澳大利亚（AUS）",
-        url: "https://www.wjx.cn/report/364626011.aspx",
-        xpath: "//*[@id='ctl02_ContentPlaceHolder1_divStatData']/div[2]/div[2]/div/table/tbody/tr[5]/td[2]/b"
-    },
-    {
-        name: "美国（USA）",
-        url: "https://www.wjx.cn/report/364654672.aspx",
-        xpath: "//*[@id='ctl02_ContentPlaceHolder1_divStatData']/div[2]/div[2]/div/table/tbody/tr[5]/td[2]/b"
-    },
-    {
-        name: "斯洛伐克（SLO）",
-        url: "https://www.wjx.cn/report/364733111.aspx",
-        xpath: "//*[@id='ctl02_ContentPlaceHolder1_divStatData']/div[2]/div[2]/div/table/tbody/tr[5]/td[2]/b"
-    },
-    {
-        name: "捷克（CEZ）",
-        url: "https://www.wjx.cn/report/364740071.aspx",
-        xpath: "//*[@id='ctl02_ContentPlaceHolder1_divStatData']/div[2]/div[2]/div/table/tbody/tr[5]/td[2]/b"
-    },
-    {
-        name: "俄罗斯（RUS）",
-        url: "https://www.wjx.cn/report/364708155.aspx",
-        xpath: "//*[@id='ctl02_ContentPlaceHolder1_divStatData']/div[2]/div[2]/div/table/tbody/tr[5]/td[2]/b"
-    },
-    {
-        name: "印度",
-        url: "https://www.wjx.cn/report/364708435.aspx",
-        xpath: "//*[@id='ctl02_ContentPlaceHolder1_divStatData']/div[2]/div[2]/div/table/tbody/tr[5]/td[2]/b"
-    },
-    {
-        name: "印度尼西亚",
-        url: "https://www.wjx.cn/report/364692062.aspx",
-        xpath: "//*[@id='ctl02_ContentPlaceHolder1_divStatData']/div[2]/div[2]/div/table/tbody/tr[5]/td[2]/b"
-    },
-    {
-        name: "墨西哥（MEX）",
-        url: "https://www.wjx.cn/report/364674108.aspx",
-        xpath: "//*[@id='ctl02_ContentPlaceHolder1_divStatData']/div[2]/div[2]/div/table/tbody/tr[5]/td[2]/b"
-    },
-    {
-        name: "荷兰（NET）",
-        url: "https://www.wjx.cn/report/364663724.aspx",
-        xpath: "//*[@id='ctl02_ContentPlaceHolder1_divStatData']/div[2]/div[2]/div/table/tbody/tr[5]/td[2]/b"
-    },
-    {
-        name: "德国（GER）",
-        url: "https://www.wjx.cn/report/364651683.aspx",
-        xpath: "//*[@id='ctl02_ContentPlaceHolder1_divStatData']/div[2]/div[2]/div/table/tbody/tr[5]/td[2]/b"
-    },
-    {
-        name: "韩国",
-        url: "https://www.wjx.cn/report/364621722.aspx",
-        xpath: "//*[@id='ctl02_ContentPlaceHolder1_divStatData']/div[2]/div[2]/div/table/tbody/tr[5]/td[2]/b"
-    }
+    { name: "阿根廷（AGR）", url: "https://www.wjx.cn/report/364692255.aspx", xpath: SAME_XPATH },
+    { name: "埃及", url: "https://www.wjx.cn/report/364750940.aspx", xpath: SAME_XPATH },
+    { name: "希腊", url: "https://www.wjx.cn/report/364755272.aspx", xpath: SAME_XPATH },
+    { name: "尼日利亚（NIG）", url: "https://www.wjx.cn/report/364654071.aspx", xpath: SAME_XPATH },
+    { name: "澳大利亚（AUS）", url: "https://www.wjx.cn/report/364626011.aspx", xpath: SAME_XPATH },
+    { name: "美国（USA）", url: "https://www.wjx.cn/report/364654672.aspx", xpath: SAME_XPATH },
+    { name: "斯洛伐克（SLO）", url: "https://www.wjx.cn/report/364733111.aspx", xpath: SAME_XPATH },
+    { name: "捷克（CEZ）", url: "https://www.wjx.cn/report/364740071.aspx", xpath: SAME_XPATH },
+    { name: "俄罗斯（RUS）", url: "https://www.wjx.cn/report/364708155.aspx", xpath: SAME_XPATH },
+    { name: "印度", url: "https://www.wjx.cn/report/364708435.aspx", xpath: SAME_XPATH },
+    { name: "印度尼西亚", url: "https://www.wjx.cn/report/364692062.aspx", xpath: SAME_XPATH },
+    { name: "墨西哥（MEX）", url: "https://www.wjx.cn/report/364674108.aspx", xpath: SAME_XPATH },
+    { name: "荷兰（NET）", url: "https://www.wjx.cn/report/364663724.aspx", xpath: SAME_XPATH },
+    { name: "德国（GER）", url: "https://www.wjx.cn/report/364651683.aspx", xpath: SAME_XPATH },
+    { name: "韩国", url: "https://www.wjx.cn/report/364621722.aspx", xpath: SAME_XPATH }
 ];
 
-// 公共代理
 const proxyBase = "https://api.allorigins.win/raw?url=";
 
-// 自动刷新间隔（毫秒）
-const REFRESH_INTERVAL = 600000; // 60 秒
+// 10分钟自动刷新一次
+const REFRESH_INTERVAL = 600000;
 
 async function fetchItem(item, index) {
     try {
         const proxyUrl = proxyBase + encodeURIComponent(item.url);
-        let res = await fetch(proxyUrl);
-        let text = await res.text();
+        const res = await fetch(proxyUrl);
+        const text = await res.text();
 
-        let parser = new DOMParser();
-        let doc = parser.parseFromString(text, 'text/html');
-        let val = doc.evaluate(item.xpath, doc, null, XPathResult.STRING_TYPE, null).stringValue || "0";
-        let num = parseInt(val.replace(/[^0-9]/g, '')) || 0;
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(text, "text/html");
 
-        return {index, name: item.name, num};
+        const val = doc.evaluate(
+            item.xpath,
+            doc,
+            null,
+            XPathResult.STRING_TYPE,
+            null
+        ).stringValue.trim();
+
+        if (!val) {
+            return { index, name: item.name, num: null };
+        }
+
+        const num = parseInt(val.replace(/[^0-9]/g, ""), 10);
+
+        if (isNaN(num)) {
+            return { index, name: item.name, num: null };
+        }
+
+        return { index, name: item.name, num };
     } catch (e) {
-        return {index, name: item.name, num: null};
+        return { index, name: item.name, num: null };
     }
 }
 
 async function start() {
     const totalEl = document.getElementById("total");
     const tableEl = document.getElementById("list");
+
     tableEl.innerHTML = "";
-    
-    const promises = list.map((item, i) => fetchItem(item, i));
-    const results = await Promise.all(promises);
+
+    const results = await Promise.all(list.map((item, i) => fetchItem(item, i)));
 
     let sum = 0;
+
     results.forEach(res => {
-        if(res.num !== null){
+        if (res.num !== null) {
             sum += res.num;
-            tableEl.innerHTML += `<tr><td>${res.index+1}</td><td>${res.name}</td><td><strong>${res.num}</strong></td></tr>`;
+            tableEl.innerHTML += `
+                <tr>
+                    <td>${res.index + 1}</td>
+                    <td>${res.name}</td>
+                    <td><strong>${res.num}</strong></td>
+                </tr>
+            `;
         } else {
-            tableEl.innerHTML += `<tr><td>${res.index+1}</td><td>${res.name}</td><td class="error">获取失败</td></tr>`;
+            tableEl.innerHTML += `
+                <tr>
+                    <td>${res.index + 1}</td>
+                    <td>${res.name}</td>
+                    <td class="error">获取失败</td>
+                </tr>
+            `;
         }
     });
 
     totalEl.innerText = sum;
 }
 
-// 页面加载时启动
 window.onload = () => {
     start();
-    // 设置定时刷新
     setInterval(start, REFRESH_INTERVAL);
 };
 </script>
