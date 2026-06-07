@@ -2,118 +2,138 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>问卷实时统计</title>
+    <title>XPath 问卷星实时统计</title>
     <style>
         body{font-family:微软雅黑;background:#f4f6f8;padding:20px}
         .box{max-width:1000px;background:white;padding:25px;border-radius:12px;margin:0 auto}
         .total{font-size:24px;color:red;margin:15px 0}
         table{width:100%;border-collapse:collapse;margin-top:20px}
-        th,td{padding:12px;border-bottom:1px solid #eee;text-align:center;}
+        th,td{padding:12px;border-bottom:1px solid #eee}
         th{background:#f7fafc}
-        button{padding:10px 20px;background:#0078d4;color:white;border:none;border-radius:6px;cursor:pointer;margin-bottom:10px}
-        .error{color:red;font-weight:bold;}
+        button{padding:10px 20px;background:#0078d4;color:white;border:none;border-radius:6px;cursor:pointer}
     </style>
 </head>
 <body>
     <div class="box">
-        <h1>📊 问卷实时统计</h1>
+        <h1>📊 总数量统计</h1>
         <div class="total">总数量：<span id="total">0</span></div>
         <button onclick="start()">刷新数据</button>
         <table>
-            <tr><th>序号</th><th>国家/问卷名称</th><th>实时数值</th></tr>
+            <tr><th>序号</th><th>问卷名称</th><th>实时数值</th></tr>
             <tbody id="list"></tbody>
         </table>
     </div>
 
 <script>
-// XPath 相同
-const SAME_XPATH = "//*[@id='ctl02_ContentPlaceHolder1_divStatData']/div[2]/div[2]/div/table/tbody/tr[5]/td[2]/b";
-
-// 国家及问卷链接
+// ====================== 你只改这里：填 链接 + XPath ======================
 const list = [
-    { name: "阿根廷（AGR）", url: "https://www.wjx.cn/report/364692255.aspx", xpath: SAME_XPATH },
-    { name: "埃及", url: "https://www.wjx.cn/report/364750940.aspx", xpath: SAME_XPATH },
-    { name: "希腊", url: "https://www.wjx.cn/report/364755272.aspx", xpath: SAME_XPATH },
-    { name: "尼日利亚（NIG）", url: "https://www.wjx.cn/report/364654071.aspx", xpath: SAME_XPATH },
-    { name: "澳大利亚（AUS）", url: "https://www.wjx.cn/report/364626011.aspx", xpath: SAME_XPATH },
-    { name: "美国（USA）", url: "https://www.wjx.cn/report/364654672.aspx", xpath: SAME_XPATH },
-    { name: "斯洛伐克（SLO）", url: "https://www.wjx.cn/report/364733111.aspx", xpath: SAME_XPATH },
-    { name: "捷克（CEZ）", url: "https://www.wjx.cn/report/364740071.aspx", xpath: SAME_XPATH },
-    { name: "俄罗斯（RUS）", url: "https://www.wjx.cn/report/364708155.aspx", xpath: SAME_XPATH },
-    { name: "印度", url: "https://www.wjx.cn/report/364708435.aspx", xpath: SAME_XPATH },
-    { name: "印度尼西亚", url: "https://www.wjx.cn/report/364692062.aspx", xpath: SAME_XPATH },
-    { name: "墨西哥（MEX）", url: "https://www.wjx.cn/report/364674108.aspx", xpath: SAME_XPATH },
-    { name: "荷兰（NET）", url: "https://www.wjx.cn/report/364663724.aspx", xpath: SAME_XPATH },
-    { name: "德国（GER）", url: "https://www.wjx.cn/report/364651683.aspx", xpath: SAME_XPATH },
-    { name: "韩国", url: "https://www.wjx.cn/report/364621722.aspx", xpath: SAME_XPATH }
+    {
+        name: "阿根廷",
+        url: "https://www.wjx.cn/report/364755272.aspx",
+        xpath: "//*[@id='ctl02_ContentPlaceHolder1_divStatData']/div[2]/div[2]/div/table/tbody/tr[5]/td[2]/b"  // 你自己复制的 XPath
+    },
+    {    
+        name: "埃及",
+        url: "https://www.wjx.cn/report/364750940.aspx",
+        xpath: "//*[@id='ctl02_ContentPlaceHolder1_divStatData']/div[2]/div[2]/div/table/tbody/tr[5]/td[2]/b"
+    },   
+    {
+        name: "希腊",
+        url: "https://www.wjx.cn/report/364755272.aspx",
+        xpath: "//*[@id='ctl02_ContentPlaceHolder1_divStatData']/div[2]/div[2]/div/table/tbody/tr[5]/td[2]/b"
+    },
+    {
+        name: "尼日利亚（NIG）",
+        url: "https://www.wjx.cn/report/364654071.aspx",
+        xpath: "//*[@id='ctl02_ContentPlaceHolder1_divStatData']/div[2]/div[2]/div/table/tbody/tr[5]/td[2]/b"
+    },
+    {
+        name: "澳大利亚（AUS）",
+        url: "https://www.wjx.cn/report/364626011.aspx",
+        xpath: "//*[@id='ctl02_ContentPlaceHolder1_divStatData']/div[2]/div[2]/div/table/tbody/tr[5]/td[2]/b"
+    },
+    {
+        name: "美国（USA）",
+        url: "https://www.wjx.cn/report/364654672.aspx",
+        xpath: "//*[@id='ctl02_ContentPlaceHolder1_divStatData']/div[2]/div[2]/div/table/tbody/tr[5]/td[2]/b"
+    },
+    {
+        name: "斯洛伐克（SLO）",
+        url: "https://www.wjx.cn/report/364733111.aspx",
+        xpath: "//*[@id='ctl02_ContentPlaceHolder1_divStatData']/div[2]/div[2]/div/table/tbody/tr[5]/td[2]/b"
+    },
+    {
+        name: "捷克（CEZ）",
+        url: "https://www.wjx.cn/report/364740071.aspx",
+        xpath: "//*[@id='ctl02_ContentPlaceHolder1_divStatData']/div[2]/div[2]/div/table/tbody/tr[5]/td[2]/b"
+    },
+    {
+        name: "俄罗斯（RUS）",
+        url: "https://www.wjx.cn/report/364708155.aspx",
+        xpath: "//*[@id='ctl02_ContentPlaceHolder1_divStatData']/div[2]/div[2]/div/table/tbody/tr[5]/td[2]/b"
+    },
+    {
+        name: "印度",
+        url: "https://www.wjx.cn/report/364708435.aspx",
+        xpath: "//*[@id='ctl02_ContentPlaceHolder1_divStatData']/div[2]/div[2]/div/table/tbody/tr[5]/td[2]/b"
+    },
+    {
+        name: "印度尼西亚",
+        url: "https://www.wjx.cn/report/364692062.aspx",
+        xpath: "//*[@id='ctl02_ContentPlaceHolder1_divStatData']/div[2]/div[2]/div/table/tbody/tr[5]/td[2]/b"
+    },
+    {
+        name: "墨西哥（MEX）",
+        url: "https://www.wjx.cn/report/364674108.aspx",
+        xpath: "//*[@id='ctl02_ContentPlaceHolder1_divStatData']/div[2]/div[2]/div/table/tbody/tr[5]/td[2]/b"
+    },
+    {
+        name: "荷兰（NET）",
+        url: "https://www.wjx.cn/report/364663724.aspx",
+        xpath: "//*[@id='ctl02_ContentPlaceHolder1_divStatData']/div[2]/div[2]/div/table/tbody/tr[5]/td[2]/b"
+    },
+    {
+        name: "德国（GER）",
+        url: "https://www.wjx.cn/report/364651683.aspx",
+        xpath: "//*[@id='ctl02_ContentPlaceHolder1_divStatData']/div[2]/div[2]/div/table/tbody/tr[5]/td[2]/b"
+    },
+    {
+        name: "韩国",
+        url: "https://www.wjx.cn/report/364621722.aspx",
+        xpath: "//*[@id='ctl02_ContentPlaceHolder1_divStatData']/div[2]/div[2]/div/table/tbody/tr[5]/td[2]/b"
+    },
+    // 可以一直加到 20 个
 ];
+// ======================================================================
 
-const proxyBase = "https://api.allorigins.win/raw?url=";
-const REFRESH_INTERVAL = 600000; // 10分钟
-
-function sleep(ms){ return new Promise(resolve=>setTimeout(resolve, ms)); }
-
-// 带重试
-async function fetchWithRetry(url, retries = 3){
-    for(let i=0;i<retries;i++){
-        try{
-            const res = await fetch(url);
-            if(res.ok) return await res.text();
-        }catch(e){}
-        await sleep(1000);
-    }
-    throw new Error("获取失败");
-}
-
-async function fetchItem(item, index){
-    try{
-        const proxyUrl = proxyBase + encodeURIComponent(item.url);
-        const text = await fetchWithRetry(proxyUrl);
-
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(text, "text/html");
-
-        const val = doc.evaluate(item.xpath, doc, null, XPathResult.STRING_TYPE, null).stringValue.trim();
-
-        if(!val) throw new Error("XPath未获取到数据");
-
-        const num = parseInt(val.replace(/[^0-9]/g,""),10);
-        if(isNaN(num)) throw new Error("数字解析失败");
-
-        return {index, name: item.name, num};
-    }catch(e){
-        console.error(item.name,e);
-        return {index, name: item.name, num:null};
-    }
-}
-
-async function start(){
-    const totalEl = document.getElementById("total");
-    const tableEl = document.getElementById("list");
-    tableEl.innerHTML = "";
-
+async function start() {
+    const total = document.getElementById("total");
+    const table = document.getElementById("list");
+    table.innerHTML = "";
     let sum = 0;
 
-    for(let i=0;i<list.length;i++){
-        const res = await fetchItem(list[i], i);
+    for (let i = 0; i < list.length; i++) {
+        let item = list[i];
+        try {
+            let res = await fetch(item.url);
+            let text = await res.text();
+            
+            // 纯前端 XPath 解析
+            let parser = new DOMParser();
+            let doc = parser.parseFromString(text, 'text/html');
+            let val = doc.evaluate(item.xpath, doc, null, XPathResult.STRING_TYPE, null).stringValue || 0;
+            let num = parseInt(val) || 0;
+            sum += num;
 
-        if(res.num!==null){
-            sum += res.num;
-            tableEl.innerHTML += `<tr><td>${res.index+1}</td><td>${res.name}</td><td><strong>${res.num}</strong></td></tr>`;
-        }else{
-            tableEl.innerHTML += `<tr><td>${res.index+1}</td><td>${res.name}</td><td class="error">获取失败</td></tr>`;
+            table.innerHTML += `<tr><td>${i+1}</td><td>${item.name}</td><td><strong>${num}</strong></td></tr>`;
+        } catch (e) {
+            table.innerHTML += `<tr><td>${i+1}</td><td>${item.name}</td><td style="color:red">获取失败</td></tr>`;
         }
-
-        await sleep(500); // 间隔500ms
     }
-
-    totalEl.innerText = sum;
+    total.innerText = sum;
 }
 
-window.onload = ()=>{
-    start();
-    setInterval(start, REFRESH_INTERVAL);
-};
+window.onload = start();
 </script>
 </body>
 </html>
