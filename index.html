@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>问卷实时统计</title>
+    <style>
+        body{font-family:微软雅黑;background:#f4f6f8;padding:20px}
+        .box{max-width:1000px;background:white;padding:25px;border-radius:12px;margin:0 auto}
+        .total{font-size:24px;color:red;margin:15px 0}
+        table{width:100%;border-collapse:collapse;margin-top:20px}
+        th,td{padding:12px;border-bottom:1px solid #eee}
+        th{background:#f7fafc}
+        button{padding:10px 20px;background:#0078d4;color:white;border:none;border-radius:6px;cursor:pointer}
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h1>📊 问卷实时统计</h1>
+        <div class="total">总数量：<span id="total">0</span></div>
+        <button onclick="start()">刷新数据</button>
+        <table>
+            <tr><th>序号</th><th>问卷名称</th><th>实时数值</th></tr>
+            <tbody id="list"></tbody>
+        </table>
+    </div>
+
+<script>
+const list = [
+    {
+        name: "阿根廷",
+        url: "https://www.wjx.cn/report/364755272.aspx",
+        xpath: "//*[contains(text(),'已答卷数')]/following::span[1]"
+    },
+    {
+        name: "问卷2",
+        url: "https://www.wjx.cn/report/xxx.aspx",
+        xpath: "//*[contains(text(),'已答卷数')]/following::span[1]"
+    },
+    // 你可以继续加 3～20 个
+];
+
+async function start() {
+    const total = document.getElementById("total");
+    const table = document.getElementById("list");
+    table.innerHTML = "";
+    let sum = 0;
+
+    for (let i = 0; i < list.length; i++) {
+        let item = list[i];
+        try {
+            let res = await fetch(item.url);
+            let text = await res.text();
+            let parser = new DOMParser();
+            let doc = parser.parseFromString(text, 'text/html');
+            let val = doc.evaluate(item.xpath, doc, null, XPathResult.STRING_TYPE, null).stringValue || "0";
+            let num = parseInt(val.replace(/[^0-9]/g, '')) || 0;
+            sum += num;
+            table.innerHTML += `<tr><td>${i+1}</td><td>${item.name}</td><td><strong>${num}</strong></td></tr>`;
+        } catch (e) {
+            table.innerHTML += `<tr><td>${i+1}</td><td>${item.name}</td><td style="color:red">获取失败</td></tr>`;
+        }
+    }
+    total.innerText = sum;
+}
+window.onload = start();
+</script>
+</body>
+</html>
